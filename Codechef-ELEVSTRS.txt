@@ -1,0 +1,23 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+    
+int t;
+cin>>t;
+while(t--)
+{
+float n,v1,v2;
+cin>>n>>v1>>v2;
+float x=sqrt(2);
+float ans1=((x*n)/v1);
+float ans2=((2*n)/v2);
+if(ans1<ans2){
+cout<<"Stairs\n";
+}else{
+cout<<"Elevator\n";
+}
+}
+    return 0;
+}

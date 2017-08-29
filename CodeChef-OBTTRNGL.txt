@@ -1,0 +1,59 @@
+#include <bits/stdc++.h>
+#define l long 
+using namespace std;
+
+int main()
+{
+int t;
+cin>>t;
+while(t--)
+{
+l int k;
+cin>>k;
+l int a,b;
+if(a>b){
+    l temp=a;
+    a=b;
+    b=temp;
+}
+l int ans=0;
+cin>>a>>b;
+if(a>b){
+    l temp=a;
+    a=b;
+    b=temp;
+}
+//odd
+if(k%2==0){
+l int mid=k/2;
+mid++;
+l int dif=a-1;
+a=1;
+b-=dif;
+if(b==mid){
+    ans=0;
+}else{
+    if(b<mid){
+        ans=b-a-1;
+    }else{
+        ans=k-b;
+    }
+}
+cout<<ans<<"\n";
+}
+else{
+   l int mid=(k+1)/2;
+    l int dif=a-1;
+a=1;
+b-=dif;
+if(b<=mid){
+    ans=b-a-1;
+}else{
+    ans=k-b;
+}
+cout<<ans<<"\n";
+}
+
+}
+return 0;
+}

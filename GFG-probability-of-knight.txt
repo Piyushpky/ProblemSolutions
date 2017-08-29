@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+#define ll long long 
+using namespace std;
+ll int n;
+ll int c = 0;
+ll int res=0;
+double dp[100][100][100+1];
+void fun(int k,int x,int y){
+    
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            dp[i][j][0]=1;
+        }
+    }
+    for(int p=1;p<=100;p++){
+        for(int i=0;i<n;i++){
+            for(int j=0;j<n;j++){
+                double res=0;
+                if(i+2<n&&j+1<n){
+                    res+=dp[i+2][j+1][p-1]/8;
+                }
+                if(i+2<n&&j-1>=0){
+                    res+=dp[i+2][j-1][p-1]/8;
+                }
+                if(i-2>=0&&j+1<n){
+                    res+=dp[i-2][j+1][p-1]/8;
+                }
+                if(i-2>=0&&j-1>=0){
+                    res+=dp[i-2][j-1][p-1]/8;
+                }
+                if(i+1<n&&j+2<n){
+                    res+=dp[i+1][j+2][p-1]/8;
+                }
+                if(i+1<n&&j-2>=0){
+                    res+=dp[i+1][j-2][p-1]/8;
+                }
+                if(i-1>=0&&j+2<n){
+                    res+=dp[i-1][j+2][p-1]/8;
+                }
+                if(i-1>=0&&j-2>=0){
+                    res+=dp[i-1][j-2][p-1]/8;
+                }
+                dp[i][j][p]=res;
+               // cout<<"dp val is "<<i<<" "<<j<<" "<<p<<" "<<dp[i][j][p]<<endl;
+            }
+            
+        }
+    }
+   
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int x,y,k;
+	    cin>>n>>x>>y>>k;
+	    fun(101,x,y);
+	    cout<<fixed<<setprecision(6)<<dp[x][y][k]<<endl;
+	   
+	}
+	return 0;
+}

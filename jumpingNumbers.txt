@@ -1,0 +1,67 @@
+#include <bits/stdc++.h>
+using namespace std;
+void sortv(vector<int> v){
+    int sz=v.size();
+    for(int i=0;i<sz;i++){
+        for(int j=0;j<sz-1;j++){
+            int a=v[j];
+            int b=v[j+1];
+            while(a/10){
+                a/=10;
+            }
+            while(b/10){
+                b/=10;
+            }
+            if(b<a){
+                int t=v[j];
+                v[j]=v[j+1];
+                v[j+1]=t;
+            }
+        }
+    }
+    for(int i=0;i<sz;i++){
+        cout<<v[i]<<" ";
+    }
+}
+int isJump(int i){
+    if(i/10==0){
+        return 1;
+    }
+    int f=0;
+    int prem=i%10;
+    i/=10;
+    while(i){
+        int rem=i%10;
+        if(abs(prem-rem)!=1){
+            f=1;
+            break;
+        }
+        i/=10;
+        prem=rem;
+    }
+    if(f==0){
+        return 1;
+    }else{
+        return 0;
+    }
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n;
+	    cin>>n;
+	    vector<int> v;
+	    for(int i=0;i<=n;i++){
+	        if(isJump(i)){
+	            v.push_back(i);
+	        }
+	    }
+	    //lexo sort
+	    sortv(v);
+	    int sz=v.size();
+	    cout<<endl;
+	}
+	return 0;
+}

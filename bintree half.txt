@@ -1,0 +1,96 @@
+#include <bits/stdc++.h>
+using namespace std;
+int seg1[100005];
+int seg2[100005];
+int a[100005];
+void update1(int node,int x,int y,int st,int end){
+    cout<<"update1 with st end"<<st<<" "<<end<<endl;
+    if(st==end){
+        a[st]=y;
+        seg1[node]=a[st]%2==0?1:0;
+        return;
+    }
+        int mid=(st+end)/2;
+        if(x>=st&&x<=mid)
+    update1(2*node,x,y,st,mid);
+    if(x>=mid+1&&x<=end)
+    update1(2*node+1,x,y,mid+1,end);
+    seg1[node]=seg1[2*node]+seg1[2*node+1];
+    cout<<"node and value "<<node<<" "<<seg1[node]<<endl;    
+    
+    
+}
+void update2(int node,int x,int y,int st,int end){
+    cout<<"update2 with st end"<<st<<" "<<end<<endl;
+    if(st==end){
+        a[st]=y;
+        seg2[node]=a[st]%2==1?1:0;
+        return;
+    }
+        int mid=(st+end)/2;
+    if(x>=st&&x<=mid)
+    update2(2*node,x,y,st,mid);
+    if(x>=mid+1&&x<=end)
+    update2(2*node+1,x,y,mid+1,end);
+    seg2[node]=seg2[2*node]+seg2[2*node+1];
+    cout<<"node and value "<<node<<" "<<seg2[node]<<endl;    
+    
+}
+void build1(int node,int st,int end){
+    cout<<"build with st end"<<st<<" "<<end<<endl;
+    if(st==end){
+        seg1[node]=a[st]%2==0?1:0;
+        return;
+    }
+    int mid=(st+end)/2;
+    build1(2*node,st,mid);
+    build1(2*node+1,mid+1,end);
+    seg1[node]=seg1[2*node]+seg1[2*node+1];
+    cout<<"node and value "<<node<<" "<<seg1[node]<<endl;
+}
+void build2(int node,int st,int end){
+
+    if(st==end){
+        seg2[node]=a[st]%2==1?1:0;
+        return;
+    }
+    int mid=(st+end)/2;
+    build2(2*node,st,mid);
+    build2(2*node+1,mid+1,end);
+    seg2[node]=seg2[2*node]+seg2[2*node+1];
+    cout<<"node and value "<<node<<" "<<seg2[node]<<endl;
+}
+int main()
+{
+    int n;
+    cin>>n;
+    //cout<<"AAAA\n"<<n<<endl;
+    for(int i=1;i<=n;i++){
+      //  cout<<"ander\n"<<endl;
+        cin>>a[i];
+    //    cout<<"data "<<a[i]<<endl;
+        //cout<<"BBBB\n"<<i<<endl;
+    }
+//    cout<<"ccccc";
+    build1(1,1,n);
+  //  cout<<"betwenn\n";
+    build2(1,1,n);
+    cout<<"no calll";
+    int q;
+    cin>>q;
+    while(q--){
+    	cout<<"q sjsajasdj"<<endl;
+        int w,x,y;
+        cin>>w>>x>>y;
+        if(w==0){
+            update1(1,x,y,1,n);
+            update2(1,x,y,1,n);
+        }else if(w==1){
+       //     cout<<query1(1,x,y)<<endl;
+        }else{
+         //   cout<<query2(1,x,y)<<endl;
+        }
+            
+    }
+    return 0;
+}

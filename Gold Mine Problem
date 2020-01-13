@@ -1,0 +1,54 @@
+Gold Mine Problem
+Given a gold mine (M) of n*m dimensions. Each field in this mine contains a positive integer which is the amount of gold in tons. Initially the miner is at first column but can be at any row. He can move only (right->,right up /,right down\) that is from a given cell, the miner can move to the cell diagonally up towards the right or right or diagonally down towards the right. Your task is to find out maximum amount of gold which he can collect.
+
+
+
+
+
+Solution:
+#include <bits/stdc++.h>
+using namespace std;
+int max_profit[100][100];
+int mine[100][100];
+int p_from(int n,int m,int a, int b){
+    if(a<n&&b<m&&a>=0&&b>=0) return max_profit[a][b];
+    return 0;
+}
+int cal_profit(int n,int m,int i, int j){
+    int mx_p = max(max(p_from(n,m,i,j+1),p_from(n,m,i+1,j+1)),p_from(n,m,i-1,j+1))+mine[i][j];
+    
+    return max_profit[i][j]=mx_p;
+}
+int solve(int n,int m){
+
+    
+    memset(max_profit,0,sizeof(max_profit));
+    for(int j=m-1;j>=0;j--){
+        for(int i=n-1;i>=0;i--){
+            max_profit[i][j]=cal_profit(n,m,i,j);
+        }
+    }
+    int mx_profit = INT_MIN;
+    for(int i=0;i<n;i++){
+        if(mx_profit<max_profit[i][0]) mx_profit=max_profit[i][0];
+    }
+
+    return mx_profit;
+}
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+        int n,m;
+        cin>>n>>m;
+        for(int i=0;i<n;i++){
+            for(int j=0;j<m;j++){
+                cin>>mine[i][j];
+            }
+        }
+        int result = solve(n,m);
+        cout<<result<<endl;
+	}
+	return 0;
+}
